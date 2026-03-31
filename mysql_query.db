@@ -1,0 +1,25 @@
+SHOW DATABASES;
+
+CREATE DATABASE client_product;
+
+USE cliente_product;
+
+CREATE TABLE clients(
+id BIGINT AUTO_INCREMENT,
+nombre VARCHAR(40) NOT NULL,
+email VARCHAR(40) NOT NULL,
+telefono VARCHAR(40) NOT NULL,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE products(
+id BIGINT AUTO_INCREMENT,
+nombre VARCHAR(40) NOT NULL,
+precio DECIMAL NOT NULL,
+stock INT NOT NULL,
+cliente_id BIGINT,
+PRIMARY KEY (id),
+FOREIGN KEY (cliente_id) REFERENCES clients(id)
+);
+
+SHOW TABLES;
