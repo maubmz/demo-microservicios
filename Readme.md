@@ -1,12 +1,112 @@
 # Microservicios en Java
-El objetivo de este proyecto es generar dos microservicios donde el microservicio B sera un microservicio que se conecte a una BD y genere dos entidades: `Clientes` y `Productos` que se utilizaran en distintas peticiones de un CRUD.
 
-Versiones utilizadas
-- Java 21
-- Maven 3.9.9
-- MYSQL
+## Descripción
 
-Comando para generar un contenedor de MySQL que se utilizara para la BD
+Este proyecto tiene como objetivo implementar dos microservicios en Java.
+El microservicio B se conecta a una base de datos MySQL y gestiona dos entidades principales:
+
+* Clientes
+* Productos
+
+Incluye operaciones CRUD completas.
+
+---
+
+## Tecnologías
+
+* Java 21
+* Maven 3.9.9
+* Spring Boot
+* MySQL 8
+* Docker & Docker Compose
+
+---
+
+## Base de datos (MySQL con Docker)
+
+Este proyecto utiliza Docker Compose para levantar la base de datos.
+
+### Requisitos
+
+* Docker Desktop instalado
+
+---
+
+## ▶Levantar la base de datos
+
+```bash
+docker compose up -d
 ```
-docker run --name bd-openfeign -e MYSQL_ROOT_PASSWORD=M1x_2021 -d mysql
+
+---
+
+## Configuración de conexión
+
+La base de datos estará disponible en:
+
 ```
+localhost:3306
+```
+
+---
+
+## Variables de entorno
+
+Se definen en el archivo `.env`:
+
+```
+MYSQL_ROOT_PASSWORD=********
+MYSQL_DATABASE=client_product
+MYSQL_USER=root
+CONTAINER_NAME=bd-openfeign
+```
+
+---
+
+## Configuración en Spring Boot
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/client_product
+    username: app_user
+    password: app_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+```
+
+---
+
+## Uso alternativo: Docker CLI
+
+```bash
+docker run -d \
+  --name bd-openfeign \
+  -e MYSQL_ROOT_PASSWORD=*** \
+  -e MYSQL_DATABASE=client_product \
+  -p 3306:3306 \
+  mysql:8.0
+```
+
+---
+
+## Estructura del proyecto
+
+```
+backend-ProjectB/
+── main/
+backend-ProjectA/
+── main/
+docker-compose.yml
+.env
+README.md
+.gitignore
+```
+
+---
+
+## Buenas prácticas aplicadas
+
+* Uso de Docker Compose para infraestructura reproducible
+* Separación de configuración mediante variables de entorno
+* Uso de usuario de aplicación (no root)
+* Persistencia de datos con volúmenes
