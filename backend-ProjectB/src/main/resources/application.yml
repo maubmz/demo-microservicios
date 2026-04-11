@@ -10,3 +10,11 @@ spring:
     show-sql: true
 server:
   port: 8080
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        orm:
+          jdbc:
+            bind: TRACE
