@@ -102,7 +102,7 @@ Escuela/
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/Escuela.git
+git clone https://github.com/maubmz/Escuela.git
 cd Escuela
 ```
 
@@ -116,7 +116,7 @@ cp .env.example .env
 Variables del archivo `.env`:
 
 ```env
-MYSQL_ROOT_PASSWORD=tu_contraseña_segura
+MYSQL_ROOT_PASSWORD=contraseña_segura
 MYSQL_DATABASE=client_product
 CONTAINER_NAME=bd-openfeign
 ```
