@@ -103,7 +103,7 @@ Escuela/
 
 ```bash
 git clone https://github.com/maubmz/Escuela.git
-cd Escuela
+cd demo-microservicios
 ```
 
 ### 2. Configurar las variables de entorno
