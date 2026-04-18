@@ -6,7 +6,7 @@ class BackendBdApplicationTests {
 
     @Test
     void contextLoads() {
-        // Smoke test — service layer tests are in com.bd.service package
+
     }
 
 }

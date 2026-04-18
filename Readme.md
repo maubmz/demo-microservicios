@@ -1,4 +1,4 @@
-# Microservices with Spring Boot & OpenFeign
+# Microservicios con Spring Boot y OpenFeign
 
 ![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5-brightgreen?logo=springboot&logoColor=white)
@@ -6,185 +6,185 @@
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
 ![OpenFeign](https://img.shields.io/badge/OpenFeign-Spring_Cloud-6DB33F?logo=spring&logoColor=white)
 
-A two-microservice system built with Spring Boot demonstrating inter-service communication via **OpenFeign**, persistence with **JPA/Hibernate**, and containerized infrastructure with **Docker Compose**.
+Sistema de dos microservicios construido con Spring Boot que demuestra la comunicación entre servicios mediante **OpenFeign**, persistencia con **JPA/Hibernate** e infraestructura contenerizada con **Docker Compose**.
 
 ---
 
-## Architecture Overview
+## Arquitectura
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                      Client (HTTP)                      │
+│                    Cliente (HTTP)                       │
 └───────────────────────┬─────────────────────────────────┘
                         │
               ┌─────────▼──────────┐
               │  ms-openfeign-client│  :8080
-              │  (Consumer Service) │
+              │  (Servicio Consumidor)│
               │  Spring Boot + Feign│
               └─────────┬──────────┘
                         │  OpenFeign (HTTP)
               ┌─────────▼──────────┐
               │   ms-products-api  │  :8081
-              │   (Provider + DB)  │
-              │   Spring Boot + JPA│
+              │  (Proveedor + BD)  │
+              │  Spring Boot + JPA │
               └─────────┬──────────┘
                         │  JDBC
               ┌─────────▼──────────┐
               │      MySQL 8.0     │  :3306
-              │   (Docker Volume)  │
+              │  (Volumen Docker)  │
               └────────────────────┘
 ```
 
-### Microservices
+### Descripción de los microservicios
 
-| Service | Port | Responsibility |
+| Servicio | Puerto | Responsabilidad |
 |---|---|---|
-| **ms-openfeign-client** | `8080` | Consumer — exposes a unified REST API and delegates all calls to ms-products-api via OpenFeign |
-| **ms-products-api** | `8081` | Provider — manages Clients, Products, and Purchases with full CRUD operations backed by MySQL |
+| **ms-openfeign-client** | `8080` | Consumidor — expone una API REST unificada y delega todas las llamadas a ms-products-api mediante OpenFeign |
+| **ms-products-api** | `8081` | Proveedor — gestiona Clientes, Productos y Compras con operaciones CRUD completas respaldadas por MySQL |
 
 ---
 
-## Technologies
+## Tecnologías
 
-| Technology | Version | Purpose |
+| Tecnología | Versión | Propósito |
 |---|---|---|
-| Java | 21 | Language |
-| Spring Boot | 3.5 | Application framework |
-| Spring Cloud OpenFeign | 2025.0.0 | Declarative HTTP client |
-| Spring Data JPA | — | ORM / database layer |
-| Hibernate | — | JPA implementation |
-| MySQL | 8.0 | Relational database |
-| Lombok | — | Boilerplate reduction |
-| JUnit 5 + Mockito | — | Unit testing |
-| Docker & Docker Compose | — | Infrastructure |
+| Java | 21 | Lenguaje |
+| Spring Boot | 3.5 | Framework de aplicación |
+| Spring Cloud OpenFeign | 2025.0.0 | Cliente HTTP declarativo |
+| Spring Data JPA | — | ORM / capa de base de datos |
+| Hibernate | — | Implementación de JPA |
+| MySQL | 8.0 | Base de datos relacional |
+| Lombok | — | Reducción de código repetitivo |
+| JUnit 5 + Mockito | — | Pruebas unitarias |
+| Docker y Docker Compose | — | Infraestructura |
 
 ---
 
-## Project Structure
+## Estructura del proyecto
 
 ```
 Escuela/
-├── ms-openfeign-client/          # Consumer microservice (port 8080)
+├── backend-projectA/             # Microservicio consumidor (puerto 8080)
 │   └── src/
 │       ├── main/java/com/java/
-│       │   ├── client/feign/     # Feign client interfaces
-│       │   ├── controller/       # REST controllers
-│       │   ├── model/            # DTOs / domain models
-│       │   └── service/          # Business logic layer
+│       │   ├── client/feign/     # Interfaces del cliente Feign
+│       │   ├── controller/       # Controladores REST
+│       │   ├── model/            # DTOs / modelos de dominio
+│       │   └── service/          # Capa de lógica de negocio
 │       └── test/java/com/java/
-│           └── service/          # Unit tests (Mockito)
-├── ms-products-api/              # Provider microservice (port 8081)
+│           └── service/          # Pruebas unitarias (Mockito)
+├── backend-ProjectB/             # Microservicio proveedor (puerto 8081)
 │   └── src/
 │       ├── main/java/com/bd/
-│       │   ├── config/           # Jackson / app configuration
-│       │   ├── controller/       # REST controllers
-│       │   ├── exception/        # Global exception handling
-│       │   ├── model/            # JPA entities
-│       │   ├── repository/       # Spring Data repositories
-│       │   └── service/          # Business logic layer
+│       │   ├── config/           # Configuración de Jackson / aplicación
+│       │   ├── controller/       # Controladores REST
+│       │   ├── exception/        # Manejo global de excepciones
+│       │   ├── model/            # Entidades JPA
+│       │   ├── repository/       # Repositorios de Spring Data
+│       │   └── service/          # Capa de lógica de negocio
 │       └── test/java/com/bd/
-│           └── service/          # Unit tests (Mockito)
-├── docker-compose.yml            # MySQL container setup
-├── .env.example                  # Environment variable template
-└── mysql_query.sql               # Database DDL scripts
+│           └── service/          # Pruebas unitarias (Mockito)
+├── docker-compose.yml            # Configuración del contenedor MySQL
+├── .env.example                  # Plantilla de variables de entorno
+└── mysql_query.sql               # Scripts DDL de base de datos
 ```
 
 ---
 
-## Getting Started
+## Primeros pasos
 
-### Prerequisites
+### Requisitos previos
 
 - Java 21+
 - Maven 3.9+
 - Docker Desktop
 
-### 1. Clone the repository
+### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/your-username/Escuela.git
+git clone https://github.com/tu-usuario/Escuela.git
 cd Escuela
 ```
 
-### 2. Configure environment variables
+### 2. Configurar las variables de entorno
 
 ```bash
 cp .env.example .env
-# Edit .env with your desired values
+# Edita el archivo .env con los valores deseados
 ```
 
-`.env` variables:
+Variables del archivo `.env`:
 
 ```env
-MYSQL_ROOT_PASSWORD=your_secure_password
+MYSQL_ROOT_PASSWORD=tu_contraseña_segura
 MYSQL_DATABASE=client_product
 CONTAINER_NAME=bd-openfeign
 ```
 
-### 3. Start the database
+### 3. Levantar la base de datos
 
 ```bash
 docker compose up -d
 ```
 
-The MySQL instance will be available at `localhost:3306`.
+La instancia de MySQL estará disponible en `localhost:3306`.
 
-### 4. Run the microservices
+### 4. Ejecutar los microservicios
 
-Start **ms-products-api** first (provider):
+Inicia primero **ms-products-api** (proveedor):
 
 ```bash
-cd ms-products-api
-mvn spring-boot:run
+cd backend-ProjectB
+./mvnw spring-boot:run
 ```
 
-Then start **ms-openfeign-client** (consumer):
+Luego inicia **ms-openfeign-client** (consumidor):
 
 ```bash
-cd ms-openfeign-client
-mvn spring-boot:run
+cd backend-projectA
+./mvnw spring-boot:run
 ```
 
 ---
 
-## API Endpoints
+## Endpoints de la API
 
-All examples target `ms-openfeign-client` at port `8080`. You can also call `ms-products-api` directly on port `8081`.
+Todos los ejemplos apuntan a `ms-openfeign-client` en el puerto `8080`. También puedes llamar directamente a `ms-products-api` en el puerto `8081`.
 
-### Clients
+### Clientes
 
-| Method | Endpoint | Description |
+| Método | Endpoint | Descripción |
 |---|---|---|
-| `GET` | `/api/clientes` | Get all clients |
-| `GET` | `/api/clientes/{id}` | Get client by ID |
-| `POST` | `/api/clientes` | Create a new client |
-| `PUT` | `/api/clientes/{id}` | Update client by ID |
-| `DELETE` | `/api/clientes/{id}` | Delete client by ID |
+| `GET` | `/api/clientes` | Obtener todos los clientes |
+| `GET` | `/api/clientes/{id}` | Obtener cliente por ID |
+| `POST` | `/api/clientes` | Crear un nuevo cliente |
+| `PUT` | `/api/clientes/{id}` | Actualizar cliente por ID |
+| `DELETE` | `/api/clientes/{id}` | Eliminar cliente por ID |
 
-**Create client example:**
+**Ejemplo para crear un cliente:**
 
 ```bash
 curl -X POST http://localhost:8080/api/clientes \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "John Doe",
-    "email": "john@example.com",
+    "name": "Juan Pérez",
+    "email": "juan@ejemplo.com",
     "phoneNumber": "5551234567",
     "purchases": []
   }'
 ```
 
-### Products
+### Productos
 
-| Method | Endpoint | Description |
+| Método | Endpoint | Descripción |
 |---|---|---|
-| `GET` | `/api/productos` | Get all products |
-| `GET` | `/api/productos/{id}` | Get product by ID |
-| `POST` | `/api/productos` | Create a new product |
-| `PUT` | `/api/productos/{id}` | Update product by ID |
-| `DELETE` | `/api/productos/{id}` | Delete product by ID |
+| `GET` | `/api/productos` | Obtener todos los productos |
+| `GET` | `/api/productos/{id}` | Obtener producto por ID |
+| `POST` | `/api/productos` | Crear un nuevo producto |
+| `PUT` | `/api/productos/{id}` | Actualizar producto por ID |
+| `DELETE` | `/api/productos/{id}` | Eliminar producto por ID |
 
-**Create product example:**
+**Ejemplo para crear un producto:**
 
 ```bash
 curl -X POST http://localhost:8080/api/productos \
@@ -196,17 +196,17 @@ curl -X POST http://localhost:8080/api/productos \
   }'
 ```
 
-### Purchases
+### Compras
 
-| Method | Endpoint | Description |
+| Método | Endpoint | Descripción |
 |---|---|---|
-| `GET` | `/api/compras` | Get all purchases |
-| `GET` | `/api/compras/{id}` | Get purchase by ID |
-| `POST` | `/api/compras` | Create a new purchase |
-| `PUT` | `/api/compras/{id}` | Update purchase by ID |
-| `DELETE` | `/api/compras/{id}` | Delete purchase by ID |
+| `GET` | `/api/compras` | Obtener todas las compras |
+| `GET` | `/api/compras/{id}` | Obtener compra por ID |
+| `POST` | `/api/compras` | Crear una nueva compra |
+| `PUT` | `/api/compras/{id}` | Actualizar compra por ID |
+| `DELETE` | `/api/compras/{id}` | Eliminar compra por ID |
 
-**Create purchase example:**
+**Ejemplo para crear una compra:**
 
 ```bash
 curl -X POST http://localhost:8080/api/compras \
@@ -219,26 +219,26 @@ curl -X POST http://localhost:8080/api/compras \
 
 ---
 
-## Running Tests
+## Ejecución de pruebas
 
 ```bash
-# Run tests for ms-openfeign-client
-cd ms-openfeign-client
-mvn test
+# Pruebas para ms-openfeign-client
+cd backend-projectA
+./mvnw test
 
-# Run tests for ms-products-api
-cd ms-products-api
-mvn test
+# Pruebas para ms-products-api
+cd backend-ProjectB
+./mvnw test
 ```
 
-Tests use **JUnit 5** and **Mockito** to unit-test the service layer in isolation, without requiring a running database or other services.
+Las pruebas utilizan **JUnit 5** y **Mockito** para testear la capa de servicio de forma aislada, sin requerir una base de datos activa ni otros servicios en ejecución.
 
 ---
 
-## Key Design Decisions
+## Decisiones de diseño
 
-- **OpenFeign over RestTemplate** — Declarative HTTP client that eliminates boilerplate, improves readability, and integrates natively with Spring Cloud.
-- **Constructor Injection** — All dependencies are injected via constructor (not `@Autowired` field injection) for better testability and immutability.
-- **Separation of Concerns** — Consumer and provider are independent Spring Boot applications; each can be deployed and scaled independently.
-- **Environment-based Configuration** — Database credentials and container names are externalized via `.env` / Docker environment variables, keeping secrets out of source control.
-- **Lazy Fetching** — JPA relationships use `FetchType.LAZY` to avoid N+1 query problems and unnecessary data loading.
+- **OpenFeign vs RestTemplate** — Cliente HTTP declarativo que elimina código repetitivo, mejora la legibilidad e integra de forma nativa con Spring Cloud.
+- **Inyección por constructor** — Todas las dependencias se inyectan mediante constructor (sin `@Autowired` en campo) para mejorar la testeabilidad e inmutabilidad.
+- **Separación de responsabilidades** — El consumidor y el proveedor son aplicaciones Spring Boot independientes; cada una puede desplegarse y escalarse de forma autónoma.
+- **Configuración basada en variables de entorno** — Las credenciales de la base de datos y nombres de contenedor se externalizan mediante `.env` / variables de entorno Docker, manteniendo los secretos fuera del control de versiones.
+- **Carga diferida (Lazy Fetching)** — Las relaciones JPA utilizan `FetchType.LAZY` para evitar el problema N+1 y la carga innecesaria de datos.
