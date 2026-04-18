@@ -11,14 +11,17 @@
 	<groupId>com.java</groupId>
 	<artifactId>backend-projectA</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>ms-openfeign-client</name>
+	<description>Consumer microservice that delegates REST calls to ms-products-api via OpenFeign</description>
 	<url/>
 	<licenses>
 		<license/>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<name>maubmz</name>
+			<url>https://github.com/maubmz</url>
+		</developer>
 	</developers>
 	<scm>
 		<connection/>

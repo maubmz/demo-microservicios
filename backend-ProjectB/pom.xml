@@ -11,14 +11,17 @@
 	<groupId>com.bd</groupId>
 	<artifactId>backend-bd</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>ms-products-api</name>
+	<description>Provider microservice with full CRUD for Clients, Products, and Purchases backed by MySQL</description>
 	<url/>
 	<licenses>
 		<license/>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<name>maubmz</name>
+			<url>https://github.com/maubmz</url>
+		</developer>
 	</developers>
 	<scm>
 		<connection/>
