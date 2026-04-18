@@ -2,7 +2,6 @@ package com.bd.controller;
 
 import com.bd.model.Client;
 import com.bd.service.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class ClientController {
 
-    @Autowired
-    private ClientService clientService;
+    private final ClientService clientService;
+
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @PostMapping("/clientes")
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
@@ -26,13 +28,13 @@ public class ClientController {
         return ResponseEntity.ok(clientService.findAllClient());
     }
 
-    @RequestMapping("/clientes/{id}")
+    @GetMapping("/clientes/{id}")
     public ResponseEntity<Client> findClientById(@PathVariable Integer id) {
         return ResponseEntity.ok(clientService.findClientById(id));
     }
 
     @PutMapping("/clientes/{id}")
-    public ResponseEntity<Client> updateClientById(@PathVariable("id") Integer id,@RequestBody Client client) {
+    public ResponseEntity<Client> updateClientById(@PathVariable("id") Integer id, @RequestBody Client client) {
         return ResponseEntity.ok(clientService.updateClientById(id, client));
     }
 
@@ -40,6 +42,5 @@ public class ClientController {
     public ResponseEntity<Client> deleteClientById(@PathVariable Integer id) {
         return ResponseEntity.ok(clientService.deleteClientById(id));
     }
-
 
 }

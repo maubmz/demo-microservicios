@@ -2,7 +2,6 @@ package com.java.controller;
 
 import com.java.model.Client;
 import com.java.service.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.List;
 @RestController
 public class ClientController {
 
-    @Autowired
-    private ClientService clientService;
+    private final ClientService clientService;
+
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @GetMapping("/allClients")
     public List<Client> allClients() {

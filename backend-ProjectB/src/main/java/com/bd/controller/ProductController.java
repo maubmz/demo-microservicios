@@ -2,7 +2,6 @@ package com.bd.controller;
 
 import com.bd.model.Product;
 import com.bd.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,8 +9,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class ProductController {
-    @Autowired
-    private ProductService productService;
+
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/productos")
     public List<Product> findAllProducts() {
@@ -29,7 +32,7 @@ public class ProductController {
     }
 
     @PutMapping("/productos/{id}")
-    public Product updateProductbyId(@PathVariable Integer id,@RequestBody Product product) {
+    public Product updateProductbyId(@PathVariable Integer id, @RequestBody Product product) {
         return productService.updateProductById(id, product);
     }
 

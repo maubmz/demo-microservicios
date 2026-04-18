@@ -2,7 +2,6 @@ package com.bd.controller;
 
 import com.bd.model.Purchase;
 import com.bd.service.PurchaseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.List;
 @RestController
 public class PurchaseController {
 
-    @Autowired
-    private PurchaseService purchaseService;
+    private final PurchaseService purchaseService;
+
+    public PurchaseController(PurchaseService purchaseService) {
+        this.purchaseService = purchaseService;
+    }
 
     @GetMapping("/compras")
     public List<Purchase> getAllPurchases() {
@@ -38,6 +40,5 @@ public class PurchaseController {
     public Purchase deletePurchase(@PathVariable("id") Integer id) {
         return purchaseService.deletePurchaseById(id);
     }
-
 
 }

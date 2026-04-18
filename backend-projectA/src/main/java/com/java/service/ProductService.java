@@ -2,7 +2,6 @@ package com.java.service;
 
 import com.java.client.feign.ProductFeignClient;
 import com.java.model.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +9,11 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    @Autowired
-    private ProductFeignClient productFeignClient;
+    private final ProductFeignClient productFeignClient;
+
+    public ProductService(ProductFeignClient productFeignClient) {
+        this.productFeignClient = productFeignClient;
+    }
 
     public List<Product> getAllProducts() {
         return productFeignClient.getAllProducts();

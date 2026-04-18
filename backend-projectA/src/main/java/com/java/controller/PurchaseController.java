@@ -2,7 +2,6 @@ package com.java.controller;
 
 import com.java.model.Purchase;
 import com.java.service.PurchaseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.List;
 @RequestMapping("/purchase")
 public class PurchaseController {
 
-    @Autowired
-    private PurchaseService purchaseService;
+    private final PurchaseService purchaseService;
+
+    public PurchaseController(PurchaseService purchaseService) {
+        this.purchaseService = purchaseService;
+    }
 
     @GetMapping("/allPurchases")
     public List<Purchase> getAllPurchases() {

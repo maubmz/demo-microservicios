@@ -2,7 +2,6 @@ package com.java.controller;
 
 import com.java.model.Product;
 import com.java.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/allProducts")
     public List<Product> getAllProducts() {
@@ -25,17 +27,17 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public Product creatProduct(@RequestBody Product product) {
+    public Product createProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
 
     @PutMapping("/update/{id}")
-    public Product updateProdyct(@RequestBody Product product, @PathVariable Integer id) {
+    public Product updateProduct(@RequestBody Product product, @PathVariable Integer id) {
         return productService.updateProductById(product, id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public Product deletePRoductById(@PathVariable Integer id) {
+    public Product deleteProductById(@PathVariable Integer id) {
         return productService.deletePRoductById(id);
     }
 
