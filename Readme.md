@@ -17,11 +17,11 @@ Sistema de dos microservicios construido con Spring Boot que demuestra la comuni
 │                    Cliente (HTTP)                       │
 └───────────────────────┬─────────────────────────────────┘
                         │
-              ┌─────────▼──────────┐
-              │  ms-openfeign-client│  :8080
+              ┌─────────▼─────────────┐
+              │  ms-openfeign-client  │  :8080
               │  (Servicio Consumidor)│
-              │  Spring Boot + Feign│
-              └─────────┬──────────┘
+              │  Spring Boot + Feign  │
+              └─────────┬─────────────┘
                         │  OpenFeign (HTTP)
               ┌─────────▼──────────┐
               │   ms-products-api  │  :8081

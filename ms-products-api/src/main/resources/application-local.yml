@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/client_product
+    username: root
+    password: M1x_2021

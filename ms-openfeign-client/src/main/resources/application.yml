@@ -1,6 +1,6 @@
 spring:
   application:
-    name: backend-projectA
+    name: ms-openfeign-client
 microservicio:
   url: http://localhost:8080
 server:
