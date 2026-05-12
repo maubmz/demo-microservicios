@@ -1,11 +1,16 @@
-package com.java.model;
+package com.bd.dto;
 
+import com.bd.model.Product;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-public class Purchase {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PurchaseDTO {
     private Integer idPurchase;
     private Integer idClient;
     private String clientName;
